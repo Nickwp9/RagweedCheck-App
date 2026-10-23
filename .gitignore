@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Local caches
+.cache/
+
+# Editor
+.idea/
+
+# Secrets (for later)
+.env
+
+# Frontend (for later)
+node_modules/

@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="568303ee-d385-4dfe-a772-b3ab1a45e936" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/open-meteo-47.00N28.90E52m.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/plot_mock.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/tests/test_mock.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/ragweed/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/ragweed/__main__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/ragweed/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/ragweed/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/ragweed/providers/mock.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/ragweed/providers/mock.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tests/test_alerts.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/tests/test_alerts.py" afterDir="false" />
-    </list>
+    <list default="true" id="568303ee-d385-4dfe-a772-b3ab1a45e936" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
