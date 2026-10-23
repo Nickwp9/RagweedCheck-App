@@ -1,13 +1,10 @@
 from datetime import datetime, timedelta
-
 from ragweed.alerts import find_high_windows
 from ragweed.models import HourlyPoint
-
 
 def make_points(values):
     start = datetime(2026, 8, 20, 0, 0)
     return [HourlyPoint(start + timedelta(hours=i), v) for i, v in enumerate(values)]
-
 
 def test_finds_single_window():
     points = make_points([0, 5, 25, 30, 40, 10, 0])
