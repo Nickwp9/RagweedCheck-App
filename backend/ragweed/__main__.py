@@ -1,8 +1,8 @@
 import argparse
-
+from datetime import datetime, timezone
 from ragweed.alerts import find_high_windows
 from ragweed.providers.mock import MockProvider
-
+from ragweed.providers.replay import ReplayProvider
 
 def main():
     parser = argparse.ArgumentParser(description="Ragweed alert checker")
@@ -12,11 +12,26 @@ def main():
                         help="hours the level must stay above the threshold")
     parser.add_argument("--days", type=int, default=3,
                         help="forecast length in days")
+    parser.add_argument("--replay", default=None,
+                        help="path to a saved CSV to replay")
+    parser.add_argument("--start", default=None,
+                        help="replay start date, e.g. 2026-08-25")
     args = parser.parse_args()
 
-    points = MockProvider().fetch(47.0, 28.8, args.days)
-    windows = find_high_windows(points, args.threshold, args.min_hours)
+    if args.replay:
+        if not args.start:
+            parser.error("--replay needs --start")
+        start = datetime.fromisoformat(args.start).replace(tzinfo=timezone.utc)
+        provider = ReplayProvider(args.replay, start)
+    else:
+        provider = MockProvider()
 
+    points = provider.fetch(47.0, 28.8, args.days)
+    if not points:
+        print("No data from that start date.")
+        return
+
+    windows = find_high_windows(points, args.threshold, args.min_hours)
     if not windows:
         print("No high-ragweed windows in this forecast.")
         return
