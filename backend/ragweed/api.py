@@ -4,9 +4,10 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from ragweed.alerts import find_high_windows
 from ragweed.providers.replay import ReplayProvider
+from ragweed.settings import REPLAY_NOW, FORECAST_DAYS
 
 DATA = Path(__file__).parent.parent / "data" / "ragweed_2026_chisinau.csv"
-REPLAY_NOW = datetime(2026, 8, 25, 6, tzinfo=timezone.utc)
+
 
 app = FastAPI(title="Ragweed Alert API")
 
@@ -34,7 +35,7 @@ def root():
 
 @app.get("/forecast", response_model=ForecastOut)
 def forecast(lat: float = 47.0, lon: float = 28.9, threshold: float = 100, min_hours: int = 1):
-    points = ReplayProvider(DATA, REPLAY_NOW).fetch(lat, lon, 3)
+    points = ReplayProvider(DATA, REPLAY_NOW).fetch(lat, lon, FORECAST_DAYS)
     windows = find_high_windows(points, threshold, min_hours)
     return ForecastOut(
         fetched_at=REPLAY_NOW,
