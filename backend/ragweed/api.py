@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from ragweed.alerts import find_high_windows
 from ragweed.providers.replay import ReplayProvider
-from ragweed.settings import REPLAY_NOW, FORECAST_DAYS
+from ragweed.settings import REPLAY_NOW, FORECAST_DAYS, DEFAULT_MIN_HOURS
 
 DATA = Path(__file__).parent.parent / "data" / "ragweed_2026_chisinau.csv"
 
@@ -34,7 +34,7 @@ def root():
     return {"status": "ok"}
 
 @app.get("/forecast", response_model=ForecastOut)
-def forecast(lat: float = 47.0, lon: float = 28.9, threshold: float = 100, min_hours: int = 1):
+def forecast(lat: float = 47.0, lon: float = 28.9, threshold: float = 100, min_hours: int = DEFAULT_MIN_HOURS):
     points = ReplayProvider(DATA, REPLAY_NOW).fetch(lat, lon, FORECAST_DAYS)
     windows = find_high_windows(points, threshold, min_hours)
     return ForecastOut(
