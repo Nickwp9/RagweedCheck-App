@@ -1,26 +1,16 @@
 from datetime import datetime, timezone
 
+# Weed pollen categories in grains/m3 (24 h average): (name, lowest value of the category).
+# TODO: add the source of this scale for the thesis.
+LEVELS = [("low", 0), ("moderate", 10), ("high", 50), ("very high", 500)]
 
-SENSITIVITY_PRESETS = {
-    "extreme": 100,      # your own example
-    "high": None,        # TODO: fill from explore.py
-    "moderate": None,    # TODO
-    "mild": None,        # TODO
-}
+# Alert threshold per allergy severity: the category from which the user is warned.
+SENSITIVITY_PRESETS = {"severe": 10, "moderate": 50, "mild": 500}
 
-# 1 hour: with 3, the first days of the season (short windows) would be dropped.
 DEFAULT_MIN_HOURS = 1
-
-# How often a user can choose to be notified, in days.
 NOTIFY_EVERY_DAYS_CHOICES = (1, 2, 3)
-
-# Level of ragweed that counts as "the season is starting".
-SEASON_START_LEVEL = None  # TODO: from the first-date lines in explore.py
-
-# Color cutoffs, as a ratio of the user's threshold.
+SEASON_START_LEVEL = 10  # first reached 29 Jul 2026, about a week before the first alert at 100
 YELLOW_FROM = 1.0
 RED_FROM = 1.5
-
-# Development only: the "pretend now" for the replay, and the forecast length.
 REPLAY_NOW = datetime(2026, 8, 25, 6, tzinfo=timezone.utc)
 FORECAST_DAYS = 3

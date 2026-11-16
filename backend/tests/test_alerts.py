@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from ragweed.alerts import find_high_windows
 from ragweed.models import HourlyPoint
+from ragweed.alerts import find_high_windows, level_for
 
 def make_points(values):
     start = datetime(2026, 8, 20, 0, 0)
@@ -12,6 +13,13 @@ def test_finds_single_window():
     assert len(windows) == 1
     assert windows[0].hours == 3
     assert windows[0].peak == 40
+
+def test_level_for():
+    assert level_for(5) == "low"
+    assert level_for(10) == "moderate"
+    assert level_for(49.9) == "moderate"
+    assert level_for(50) == "high"
+    assert level_for(500) == "very high"
 
 def test_ignores_run_shorter_than_min_hours():
     # first run is only 2 hours (25, 30), second run is 3 hours (40, 40, 40)

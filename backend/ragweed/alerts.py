@@ -1,9 +1,10 @@
 from ragweed.models import HourlyPoint, Window
+from ragweed.settings import LEVELS
 
-
+def level_for(value: float) -> str:
+    return [name for name, start in LEVELS if value >= start][-1]
 def find_high_windows(
-    points: list[HourlyPoint], threshold: float, min_hours: int
-) -> list[Window]:
+    points: list[HourlyPoint], threshold: float, min_hours: int) -> list[Window]:
     windows: list[Window] = []
     run: list[HourlyPoint] = []
 

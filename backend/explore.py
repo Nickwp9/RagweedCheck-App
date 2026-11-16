@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from ragweed.alerts import find_high_windows
 from ragweed.providers.replay import ReplayProvider
 
+
 DATA = Path(__file__).parent / "data" / "ragweed_2026_chisinau.csv"
 
 
@@ -49,3 +50,9 @@ for level in [10, 20, 50]:
         print(f"first >= {level}: never reached")
     else:
         print(f"first >= {level}: {first:%a %d %b %H:%M} UTC")
+
+daily = df.set_index("time")["ragweed"].resample("D").mean()
+names = [n for n, _ in LEVELS]
+cats = pd.cut(daily, bins=[s for _, s in LEVELS] + [float("inf")], labels=names, right=False)
+print(cats.value_counts().reindex(names))
+print(f"highest daily mean: {daily.max():.1f} on {daily.idxmax():%d %b}")
