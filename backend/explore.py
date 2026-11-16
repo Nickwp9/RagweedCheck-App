@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 from ragweed.alerts import find_high_windows
 from ragweed.providers.replay import ReplayProvider
-
+from ragweed.settings import LEVELS
 
 DATA = Path(__file__).parent / "data" / "ragweed_2026_chisinau.csv"
 
@@ -56,3 +56,6 @@ names = [n for n, _ in LEVELS]
 cats = pd.cut(daily, bins=[s for _, s in LEVELS] + [float("inf")], labels=names, right=False)
 print(cats.value_counts().reindex(names))
 print(f"highest daily mean: {daily.max():.1f} on {daily.idxmax():%d %b}")
+for t in [10, 50, 100, 200, 300, 500]:
+    print(f"daily mean >= {t}: {(daily >= t).sum()} days")
+print(f"first day with daily mean >= 10: {daily[daily >= 10].index.min():%d %b}")
