@@ -12,7 +12,7 @@ NOTIFY_EVERY_DAYS_CHOICES = (1, 2, 3)
 SEASON_START_LEVEL = 10
 YELLOW_FROM = 1.0
 RED_FROM = 1.5
-REPLAY_NOW = datetime(2026, 8, 25, 6, tzinfo=timezone.utc)
+REPLAY_NOW = datetime(2026, 8, 24, 21, tzinfo=timezone.utc)
 FORECAST_DAYS = 3
 SENSITIVITY_PRESETS = {"severe": 10, "moderate": 50, "mild": 200}
 SEASON_START_LEVEL = 10
